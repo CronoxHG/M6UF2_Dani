@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Types; 
+import java.sql.Types;
 
 public class UserPgDAO implements DAO<User> {
     private Connection conn;
@@ -36,12 +36,12 @@ public class UserPgDAO implements DAO<User> {
 
           String sql = "SELECT * FROM users";
         try {
-            
-       
-    
+
+
+
         ///Aqui
-        ///  cal fer el query i recòrrer el ResultSet per afegir els usuaris 
-        /// 
+        ///  cal fer el query i recòrrer el ResultSet per afegir els usuaris
+        ///
         /// a la llista users
         throw new SQLException("Not implemented yet");
 
@@ -72,12 +72,12 @@ public class UserPgDAO implements DAO<User> {
                 // 4️⃣ Retrieve the returned value
                 String result = cs.getString(1);
                 return result;
-
+            }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    
+        return "hi";
 
     }
 
