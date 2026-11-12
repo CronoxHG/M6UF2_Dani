@@ -51,6 +51,7 @@ public class ReadConfigXML {
 
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(file);
 
@@ -59,9 +60,8 @@ public class ReadConfigXML {
 			user = doc.getElementsByTagName("user").item(0).getTextContent();
 			password = doc.getElementsByTagName("password").item(0).getTextContent();
 			database = doc.getElementsByTagName("database").item(0).getTextContent();
-System.out.println("host");
 		} catch (Exception e) {
-			System.out.println("Error" + e.getMessage());
+			throw new IllegalArgumentException("No s'ha pogut llegir la configuració XML: " + config_file, e);
 		}
 	}
 }

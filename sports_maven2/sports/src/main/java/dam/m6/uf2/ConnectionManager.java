@@ -1,10 +1,8 @@
 package dam.m6.uf2;
 
-
-import java.sql.SQLException;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectionManager {
     private static String host = "";
@@ -19,7 +17,7 @@ public class ConnectionManager {
     }
 
     public static Connection getConnection(String config_file) {
-        ReadConfigXML config =  new ReadConfigXML(config_file);
+        ReadConfigXML config = new ReadConfigXML(config_file);
 
         host = config.getHost();
         port = config.getPort();
@@ -27,29 +25,19 @@ public class ConnectionManager {
         username = config.getUser();
         password = config.getPassword();
 
-        urlstring = "jdbc:postgresql://"+host+":"+port + "/" + database;
-
-
-        System.out.println("DEBUG: Dades obtingudes del fitxer XML -> "+ host + " / " + port + " / "+ database + " / "+ username);
-
+        urlstring = "jdbc:postgresql://" + host + ":" + port + "/" + database;
+        System.out.println("Connectant a " + urlstring + " amb l'usuari " + username);
 
         try {
-            try {
-                con = DriverManager.getConnection(urlstring, username, password);
-                // Aqui heu de connectar amb la base de dades
-                //System.out.println("Connection established successfully.");
-                throw new SQLException("Not implemented yet" );
-
-            } catch (SQLException ex) {
-                // log an exception. fro example:
-                System.out.println("Failed to create the database connection.");
-            }
+            con = DriverManager.getConnection(urlstring, username, password);
+            System.out.println("Connection established successfully.");
+        } catch (SQLException ex) {
+            System.err.println("Failed to create the database connection: " + ex.getMessage());
+            con = null;
         } catch (Exception ex) {
-            // log an exception. for example:
-            System.out.println("Driver not found.");
+            System.err.println("PostgreSQL driver or configuration error: " + ex.getMessage());
+            con = null;
         }
         return con;
     }
-
-
 }
