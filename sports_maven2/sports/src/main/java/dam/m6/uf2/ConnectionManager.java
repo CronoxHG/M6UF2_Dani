@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnectionManager {
-    private static String host = "";   
+    private static String host = "";
     private static String port = "";
     private static String database = "";
     private static String username = "";
@@ -27,7 +27,7 @@ public class ConnectionManager {
         username = config.getUser();
         password = config.getPassword();
 
-        urlstring = "jdbc:....et...etc"; // Aquí heu de construir la URL de connexió
+        urlstring = "jdbc:postgresql://"+host+":"+port + "/" + database;
 
 
         System.out.println("DEBUG: Dades obtingudes del fitxer XML -> "+ host + " / " + port + " / "+ database + " / "+ username);
@@ -35,17 +35,18 @@ public class ConnectionManager {
 
         try {
             try {
+                con = DriverManager.getConnection(urlstring, username, password);
                 // Aqui heu de connectar amb la base de dades
                 //System.out.println("Connection established successfully.");
                 throw new SQLException("Not implemented yet" );
 
             } catch (SQLException ex) {
                 // log an exception. fro example:
-                System.out.println("Failed to create the database connection."); 
+                System.out.println("Failed to create the database connection.");
             }
         } catch (Exception ex) {
             // log an exception. for example:
-            System.out.println("Driver not found."); 
+            System.out.println("Driver not found.");
         }
         return con;
     }
