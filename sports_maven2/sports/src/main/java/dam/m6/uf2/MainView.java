@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MainView {
-    private final Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
     public int mainMenu() {
         System.out.println("\n1. Afegir esport\n2. Afegir atleta\n3. Llistar atletes per esport\n0. Sortir");
         System.out.print("Opció: ");

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtletaDAO implements DAO<Atleta> {
-    private final Connection conn;
+    private  Connection conn;
     public AtletaDAO(Connection conn) { this.conn = conn; }
 
     @Override public void add(Atleta atleta) {

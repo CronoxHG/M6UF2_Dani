@@ -1,8 +1,8 @@
 package dam.m6.uf2;
 
 public class Sport {
-    private final int id;
-    private final String name;
+    private  int id;
+    private  String name;
 
     public Sport(String name) {
         this(0, name);

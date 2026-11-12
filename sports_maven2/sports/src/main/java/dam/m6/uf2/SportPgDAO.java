@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportPgDAO implements DAO<Sport> {
-    private final Connection conn;
+    private  Connection conn;
     public SportPgDAO(Connection conn) { this.conn = conn; }
 
     @Override public void add(Sport sport) {
