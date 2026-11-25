@@ -8,19 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AtletaDAO implements DAO<Atleta> {
-    private  Connection conn;
-    public AtletaDAO(Connection conn) { this.conn = conn; }
+    private final Connection conn;
 
-    @Override public void add(Atleta atleta) {
+    public AtletaDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    @Override
+    public void add(Atleta atleta) {
         String sql = "INSERT INTO deportistas (nombre, cod_deporte) VALUES (?, ?)";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, atleta.getName());
-            statement.setInt(2, atleta.getSportId());
+            if (atleta.getSportId() == 0) {
+                statement.setNull(2, java.sql.Types.INTEGER);
+            } else {
+                statement.setInt(2, atleta.getSportId());
+            }
             statement.executeUpdate();
-        } catch (SQLException e) { throw new IllegalStateException("No s'ha pogut afegir l'atleta", e); }
+        } catch (SQLException e) {
+            throw new IllegalStateException("No s'ha pogut afegir l'atleta", e);
+        }
     }
 
-    @Override public List<Atleta> getAll() {
+    @Override
+    public List<Atleta> getAll() {
         List<Atleta> athletes = new ArrayList<>();
         String sql = "SELECT cod, nombre, cod_deporte FROM deportistas ORDER BY cod";
         try (PreparedStatement statement = conn.prepareStatement(sql);
@@ -45,10 +56,13 @@ public class AtletaDAO implements DAO<Atleta> {
             statement.setInt(1, sportId);
             try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
-                    athletes.add(new Atleta(rs.getInt("cod"), rs.getString("nombre"), rs.getInt("cod_deporte")));
+                    athletes.add(new Atleta(rs.getInt("cod"), rs.getString("nombre"),
+                            rs.getInt("cod_deporte")));
                 }
             }
-        } catch (SQLException e) { throw new IllegalStateException("No s'han pogut llegir els atletes", e); }
+        } catch (SQLException e) {
+            throw new IllegalStateException("No s'han pogut llegir els atletes", e);
+        }
         return athletes;
     }
 }

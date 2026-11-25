@@ -15,15 +15,9 @@ public class MainView {
         String name = scanner.nextLine().trim();
         return name.isEmpty() ? null : new Sport(name);
     }
-    public Atleta AtletaForm(List<Sport> sports) {
-        if (sports.isEmpty()) { System.out.println("Primer cal afegir un esport."); return null; }
-        LlistaEsports(sports);
-        System.out.print("ID de l'esport de l'atleta: ");
-        int sportId = readInt();
-        if (!sports.stream().anyMatch(s -> s.getId() == sportId)) { System.out.println("ID d'esport no vàlid."); return null; }
+    public String DemanaNomAtleta() {
         System.out.print("Nom de l'atleta: ");
-        String name = scanner.nextLine().trim();
-        return name.isEmpty() ? null : new Atleta(0, name, sportId);
+        return scanner.nextLine().trim();
     }
     public int DemanaEsport(List<Sport> sports) {
         if (sports.isEmpty()) { System.out.println("No hi ha esports."); return -1; }
@@ -40,6 +34,23 @@ public class MainView {
     public void LlistaEsports(List<Sport> sports) {
         for (Sport sport : sports) System.out.println(sport.getId() + ". " + sport.getName());
     }
+
+    public void MostraEsportAfegit(int id) {
+        System.out.println("Esport afegit amb ID " + id + ".");
+    }
+
+    public void MostraAtletaAfegit() {
+        System.out.println("Atleta afegit.");
+    }
+
+    public void MostraOpcioNoValida() {
+        System.out.println("Opció no vàlida.");
+    }
+
+    public void MostraError(String message) {
+        System.err.println(message);
+    }
+
     private int readInt() {
         try { return Integer.parseInt(scanner.nextLine().trim()); }
         catch (NumberFormatException e) { return -1; }

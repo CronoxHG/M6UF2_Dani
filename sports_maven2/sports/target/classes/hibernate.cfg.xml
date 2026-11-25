@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <!-- Conexión a la base de datos -->
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/esports</property>
-        <property name="connection.username">admin@admin.com</property>
-        <property name="connection.password">admin</property>
-
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/esports</property>
+        <property name="hibernate.connection.username">admin@admin.com</property>
+        <property name="hibernate.connection.password">admin</property>
         <property name="hibernate.default_schema">public</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
 
-        <!-- Mostrar SQL en consola -->
-        <property name="show_sql">false</property>
-        <property name="format_sql">false</property>
-
-        <!-- Mapeo de las clases -->
-        <mapping class="castellet.dam.m12.uf2.hibernate.User"/>
+        <mapping class="dam.m6.uf2.Sport"/>
+        <mapping class="dam.m6.uf2.Atleta"/>
     </session-factory>
 </hibernate-configuration>
